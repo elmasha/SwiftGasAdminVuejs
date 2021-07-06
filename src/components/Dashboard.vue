@@ -1,6 +1,10 @@
 <template>
   <div><h2>DashBoard</h2>
       <div class="container">
+
+
+
+      
        <div class="fixed-action-btn">
               <router-link to="/addcylinder" 
                   class="btn-floating btn-large red">

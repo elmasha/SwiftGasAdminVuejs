@@ -64,7 +64,7 @@
                     <input type="text" placeholder="Gas name" v-model="accessname" id="title" >
                 </div>
 
-                <button type="submit" id="btn" class="btn">Upload cylinder</button>
+                <button type="submit" id="btn" class="btn">Upload Accessories</button>
                 
                 </form>
               

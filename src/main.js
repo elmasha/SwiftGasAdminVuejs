@@ -3,8 +3,12 @@ import App from './App.vue'
 import router from './router'
 import { BootstrapVue, IconsPlugin, BNavbar } from 'bootstrap-vue'
 import { firestorePlugin } from 'vuefire'
+import { BProgressBar } from 'bootstrap-vue'
+Vue.component('b-progress-bar', BProgressBar)
 
 Vue.use(firestorePlugin)
+import KProgress from 'k-progress';
+Vue.component('k-progress', KProgress);
 
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'vue-select/dist/vue-select.css';

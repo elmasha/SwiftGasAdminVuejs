@@ -13,6 +13,11 @@ Vue.component('k-progress', KProgress);
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'vue-select/dist/vue-select.css';
 
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+
+Vue.use(Vuetify)
+
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 

@@ -1,54 +1,86 @@
 <template>
-  <div>
+  <div id="dasboard">
     <h4 class="">SwiftGas DashBoard</h4>
     <br />
-    <div class="container">
-      <div class="col-md-12">
-        <div class="col-md-6">
-          <h6>Active Shops</h6>
-          <k-progress
-            :value="25"
-            variant="success"
-            :percent="totalPercent"
-            :striped="striped"
-            line-height="13"
-            active="true"
-            color="#242a37"
-            active-color="#ff8900"
-          ></k-progress>
-          <h6>InActive Shops</h6>
-          <k-progress
-            value="45%"
-            line-height="13"
-            percent="100"
-            color="#242a37"
-            active="true"
-            show-progress
-            active-color="#ff8900"
-          ></k-progress>
+    <b-row>
+      <b-col md="12">
+        <div class="container">
+          <div class="col-md-8">
+            <h6>Active Shops</h6>
+            <k-progress
+              :value="25"
+              variant="success"
+              :percent="totalPercent"
+              :striped="striped"
+              line-height="13"
+              active="true"
+              color="#242a37"
+              active-color="#ff8900"
+            ></k-progress>
+            <h6>InActive Shops</h6>
+            <k-progress
+              value="45%"
+              line-height="13"
+              percent="100"
+              color="#242a37"
+              active="true"
+              show-progress
+              active-color="#ff8900"
+            ></k-progress>
+          </div>
         </div>
+      </b-col>
+      <b-col col="5">
+        <div class="">
+          <div class="col-md-12">
+            <div class="container-fluid container-xl d-flex container col-md-12">
+              <h5>{{ active }}</h5>
 
-        <div class="col-md-6">
-          <div class="container">
-            <div class="">
-              <div class="container-fluid container-xl d-flex container col-md-12"></div>
-              <div class="row">
-                <div class="col-md-3">
-                  <h2>{{ active }}</h2>
-                </div>
-                <div class="col-md-3">
-                  <h2>{{ inactive }}</h2>
-                </div>
-                <div class="col-md-3">
-                  <h2>{{ noOfshops }}</h2>
-                </div>
-                <div class="col-md-3">
-                  <h2>{{ noOfOrders }}</h2>
+              <h5>{{ inactive }}</h5>
+
+              <h5>{{ noOfshops }}</h5>
+
+              <h5>{{ noOfOrders }}</h5>
+            </div>
+
+            <div>
+              <div class="row" id="fetch">
+                <div class="with-header flexbox-container">
+                  <div v-for="(vendor, id) in vendors" v-bind:key="id" class="col-md-9">
+                    <b-card-group>
+                      <v-avatar color="primary" size="56"></v-avatar>
+                      <b-card
+                        id="CardView"
+                        img-left
+                        :footer="vendor.shopNo"
+                        tag="article"
+                        style="max-height: 100rem"
+                        class="flexbox-item col-md-12"
+                      >
+                        <div class="pa-7 secondary rounded-circle d-inline-block">
+                          <img
+                            id="V_Image"
+                            style="border-radius: 50%"
+                            :src="vendor.image"
+                            alt=""
+                          />
+                        </div>
+                        <b-card-text>
+                          <span>{{ vendor.Name }}</span>
+                        </b-card-text>
+                      </b-card>
+                    </b-card-group>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </b-col>
+    </b-row>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="row"></div>
       </div>
 
       <div class="fixed-action-btn">
@@ -72,7 +104,7 @@ export default {
       noOfCustomers: null,
       noOfOrders: 0,
       totalPercent: 0,
-
+      vendors: [],
       percentActive: null,
       percentInactive: null,
       max: 100,
@@ -91,6 +123,21 @@ export default {
   },
 
   mounted() {
+    db.collection("SwiftGas_Vendor")
+      .get()
+      .then((queryResult) => {
+        queryResult.forEach((doc) => {
+          console.log(doc.data());
+          const data = {
+            id: doc.id,
+            Name: doc.data().first_name,
+            shopName: doc.data().ShopName,
+            shopNo: doc.data().Shop_No,
+            image: doc.data().User_Image,
+          };
+          this.vendors.push(data);
+        });
+      });
     db.collection("Admin")
       .doc("Elmasha")
       .get()
@@ -114,3 +161,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+#V_Image {
+  width: 50px;
+  height: 50px;
+}
+</style>

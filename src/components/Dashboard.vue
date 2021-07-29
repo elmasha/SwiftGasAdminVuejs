@@ -9,7 +9,6 @@
             <div class="col-md-12">
               <h6>Active Shops</h6>
               <k-progress
-                :value="25"
                 variant="success"
                 :percent="totalPercent"
                 :striped="striped"
@@ -20,7 +19,6 @@
               ></k-progress>
               <h6>InActive Shops</h6>
               <k-progress
-                value="45%"
                 line-height="13"
                 :percent="totalPercent2"
                 color="#242a37"
@@ -120,6 +118,8 @@ export default {
   name: "dashboard",
   data() {
     return {
+      timerEnabled: false,
+      timerCount: 10,
       value: null,
       active: 0,
       inactive: 0,
@@ -129,20 +129,29 @@ export default {
       totalPercent: 0,
       totalPercent2: 0,
       vendors: [],
+
       percentActive: 0,
       percentInactive: 0,
       max: 100,
       data1: [],
     };
   },
+
+  beforeUpdate() {
+    this.ActiveStatus;
+  },
+  updated() {
+    this.ActiveStatus;
+  },
+  beforeMount() {
+    this.ActiveStatus;
+  },
+
   created() {
     this.ActiveStatus;
   },
 
   computed() {
-    this.ActiveStatus;
-  },
-  beforeUpdate() {
     this.ActiveStatus;
   },
 

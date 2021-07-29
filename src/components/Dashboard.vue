@@ -1,83 +1,96 @@
 <template>
-  <div id="dasboard">
+  <div id="dashboard">
     <h4 class="">SwiftGas DashBoard</h4>
     <br />
-    <b-row>
-      <b-col md="12">
-        <div class="container">
-          <div class="col-md-8">
-            <h6>Active Shops</h6>
-            <k-progress
-              :value="25"
-              variant="success"
-              :percent="totalPercent"
-              :striped="striped"
-              line-height="13"
-              active="true"
-              color="#242a37"
-              active-color="#ff8900"
-            ></k-progress>
-            <h6>InActive Shops</h6>
-            <k-progress
-              value="45%"
-              line-height="13"
-              percent="100"
-              color="#242a37"
-              active="true"
-              show-progress
-              active-color="#ff8900"
-            ></k-progress>
+    <b-container>
+      <b-row align-v="center">
+        <b-col md="8">
+          <div class="container">
+            <div class="col-md-12">
+              <h6>Active Shops</h6>
+              <k-progress
+                :value="25"
+                variant="success"
+                :percent="totalPercent"
+                :striped="striped"
+                line-height="13"
+                active="true"
+                color="#242a37"
+                active-color="#ff8900"
+              ></k-progress>
+              <h6>InActive Shops</h6>
+              <k-progress
+                value="45%"
+                line-height="13"
+                :percent="totalPercent2"
+                color="#242a37"
+                active="true"
+                show-progress
+                active-color="#ff8900"
+              ></k-progress>
+            </div>
           </div>
-        </div>
-      </b-col>
-      <b-col col="5">
-        <div class="">
-          <div class="col-md-12">
-            <div class="container-fluid container-xl d-flex container col-md-12">
-              <h5>{{ active }}</h5>
+        </b-col>
+        <b-col col="9" md="9">
+          <div class="text-center">
+            <div id="dash" class="container-xl d-flex col-md-9">
+              {{ ActiveStatus() }}
 
-              <h5>{{ inactive }}</h5>
+              <h6>
+                <span
+                  >Shops Registered <strong id="showValue">{{ noOfshops }}</strong></span
+                >
+              </h6>
 
-              <h5>{{ noOfshops }}</h5>
+              <h6>
+                <span
+                  >Registered Customer
+                  <strong id="showValue">{{ noOfCustomers }}</strong></span
+                >
+              </h6>
 
-              <h5>{{ noOfOrders }}</h5>
+              <h6>
+                <span
+                  >No of orders <strong id="showValue">{{ noOfOrders }}</strong></span
+                >
+              </h6>
             </div>
 
             <div>
-              <div class="row" id="fetch">
-                <div class="with-header flexbox-container">
-                  <div v-for="(vendor, id) in vendors" v-bind:key="id" class="col-md-9">
-                    <b-card-group>
-                      <v-avatar color="primary" size="56"></v-avatar>
-                      <b-card
-                        id="CardView"
-                        img-left
-                        :footer="vendor.shopNo"
-                        tag="article"
-                        style="max-height: 100rem"
-                        class="flexbox-item col-md-12"
-                      >
-                        <div class="pa-7 secondary rounded-circle d-inline-block">
-                          <img
-                            id="V_Image"
-                            style="border-radius: 50%"
-                            :src="vendor.image"
-                            alt=""
-                          />
-                        </div>
-                        <b-card-text>
+              <div class="" id="fetch">
+                <div class="with-header">
+                  <h5>Registered shops</h5>
+                  <perfect-scrollbar>
+                    <div
+                      v-for="(vendor, id) in vendors"
+                      v-bind:key="id"
+                      class="col-md-5 text-center"
+                    >
+                      <div class="pa-9 secondary rounded-circle d-inline-block">
+                        <img
+                          id="V_Image"
+                          style="border-radius: 50%"
+                          :src="vendor.image"
+                          alt=""
+                        />
+                        <div class="col-md-12">
                           <span>{{ vendor.Name }}</span>
-                        </b-card-text>
-                      </b-card>
-                    </b-card-group>
-                  </div>
+                          <br />
+                          <span>{{ vendor.shopNo }}</span>
+                          <br />
+                          <span>{{ vendor.shopName }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </perfect-scrollbar>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </b-col>
-    </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
+
     <div class="container">
       <div class="col-md-12">
         <div class="row"></div>
@@ -104,6 +117,7 @@ export default {
       noOfCustomers: null,
       noOfOrders: 0,
       totalPercent: 0,
+      totalPercent2: 0,
       vendors: [],
       percentActive: null,
       percentInactive: null,
@@ -156,14 +170,30 @@ export default {
     ActiveStatus() {
       var average = this.active / this.noOfshops;
       this.totalPercent = average * 100;
-      console.log(this.totalPercent);
+      console.log("Total Percentage", this.totalPercent);
+
+      var average2 = this.inactive / this.noOfshops;
+      this.totalPercent2 = average2 * 100;
+      console.log("Total Percentage", this.totalPercent2);
     },
   },
 };
 </script>
 <style scoped>
+#dash {
+  display: table;
+  margin: 0 auto;
+}
 #V_Image {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+}
+#showValue {
+  font-size: 30px;
+  color: #ff8900;
+}
+
+.ps {
+  height: 500px;
 }
 </style>

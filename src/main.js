@@ -10,6 +10,12 @@ Vue.use(firestorePlugin)
 import KProgress from 'k-progress';
 Vue.component('k-progress', KProgress);
 
+
+
+import PerfectScrollbar from 'vue2-perfect-scrollbar'
+import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+ 
+Vue.use(PerfectScrollbar)
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'vue-select/dist/vue-select.css';
 

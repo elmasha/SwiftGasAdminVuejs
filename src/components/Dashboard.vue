@@ -2,9 +2,9 @@
   <div id="dashboard">
     <h4 class="">SwiftGas DashBoard</h4>
     <br />
-    <b-container>
+    <b-container class="text-center">
       <b-row align-v="center">
-        <b-col md="8">
+        <b-col md="12">
           <div class="container">
             <div class="col-md-12">
               <h6>Active Shops</h6>
@@ -31,29 +31,39 @@
             </div>
           </div>
         </b-col>
+
+        <div class="container text-center">
+          <v-container class="my-12">
+            <v-layout row wrap justify-space-around>
+              <v-flex xs6 md4>
+                <h6>
+                  <strong id="showValue">{{ noOfshops }}</strong>
+                  <br /><span id="labelVal"> Shops OnBoard</span>
+                </h6>
+              </v-flex>
+              <v-flex xs6 md4>
+                <h6>
+                  <strong id="showValue">{{ noOfCustomers }}</strong>
+                  <br />
+                  <span id="labelVal">All Customer </span>
+                </h6>
+              </v-flex>
+              <v-flex text-xs-centered xs12 md4>
+                <h6>
+                  <strong id="showValue">{{ noOfOrders }}</strong>
+                  <br />
+                  <span id="labelVal">Total Orders </span>
+                </h6>
+              </v-flex>
+              <v-flex xs6 md4> </v-flex>
+            </v-layout>
+          </v-container>
+        </div>
+
         <b-col col="9" md="9">
           <div class="text-center">
             <div id="dash" class="container-xl d-flex col-md-9">
               {{ ActiveStatus() }}
-
-              <h6>
-                <span
-                  >Shops Registered <strong id="showValue">{{ noOfshops }}</strong></span
-                >
-              </h6>
-
-              <h6>
-                <span
-                  >Registered Customer
-                  <strong id="showValue">{{ noOfCustomers }}</strong></span
-                >
-              </h6>
-
-              <h6>
-                <span
-                  >No of orders <strong id="showValue">{{ noOfOrders }}</strong></span
-                >
-              </h6>
             </div>
 
             <div>
@@ -73,7 +83,7 @@
                           :src="vendor.image"
                           alt=""
                         />
-                        <div class="col-md-12">
+                        <div>
                           <span>{{ vendor.Name }}</span>
                           <br />
                           <span>{{ vendor.shopNo }}</span>
@@ -119,8 +129,8 @@ export default {
       totalPercent: 0,
       totalPercent2: 0,
       vendors: [],
-      percentActive: null,
-      percentInactive: null,
+      percentActive: 0,
+      percentInactive: 0,
       max: 100,
       data1: [],
     };
@@ -188,9 +198,15 @@ export default {
   width: 40px;
   height: 40px;
 }
+#labelVal {
+  font-weight: 500;
+  font-size: 18px;
+}
 #showValue {
   font-size: 30px;
   color: #ff8900;
+  margin: 30px;
+  margin-bottom: 20px;
 }
 
 .ps {
